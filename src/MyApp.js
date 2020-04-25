@@ -7,11 +7,18 @@ import ManageSignUp from "./components/user/ManageSignUp";
 import HomePage from "./components/common/HomePage";
 import UserList from "./components/user/UserList";
 import UserProfileDetail from "./components/user/UserProfileDetail";
+import firebaseConfig from "./firebaseConfig";
+import Firebase from "firebase";
 
 function MyApp() {
   const [isUserLoggedState, setIsUserLoggedState] = useState(false);
 
   useEffect(() => {
+    Firebase.initializeApp(firebaseConfig);
+    const refDB = Firebase.database().ref().child("object").child("name");
+    refDB.on("value", snapshot => {
+      console.log(snapshot.val());
+    });
     checkIsUserLoggedIn();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
