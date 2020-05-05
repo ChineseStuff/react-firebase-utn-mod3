@@ -1,3 +1,5 @@
+import * as firebase from "firebase";
+
 const firebaseConfig = {
   apiKey: "AIzaSyD8hiBzpDwqP3vvPXDL70YbYVDTNGgicRg",
   authDomain: "react-utn-mod3-3f07e.firebaseapp.com",
@@ -9,4 +11,12 @@ const firebaseConfig = {
   measurementId: "G-DTGDTK1KBE",
 };
 
-export default firebaseConfig;
+!firebase.apps.length && firebase.initializeApp(firebaseConfig);
+firebase.auth = firebase.auth();
+const db = firebase.firestore();
+db.settings({
+  timestampsInSnapshots: true,
+});
+firebase.db = db;
+
+export default firebase;
